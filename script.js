@@ -25,6 +25,7 @@ highScoreElement.textContent = highScore;
 
 document.addEventListener('keydown', function (e) {
     if (e.key === ' ') {
+        e.preventDefault(); // Prevent scrolling down when spacebar is pressed
         if (gameState === 'start' || gameState === 'gameover') {
             resetGame();
             gameState = 'playing';
