@@ -52,21 +52,21 @@ function resetGame() {
 
 
 function direction(e) {
-  const key = e.key.toLowerCase(); // normalize to lowercase
+    const key = e.key.toLowerCase(); // normalize to lowercase
 
-  if (key === 'a' && dx === 0) {
-    dx = -box;
-    dy = 0;
-  } else if (key === 'd' && dx === 0) {
-    dx = box;
-    dy = 0;
-  } else if (key === 'w' && dy === 0) {
-    dx = 0;
-    dy = -box;
-  } else if (key === 's' && dy === 0) {
-    dx = 0;
-    dy = box;
-  }
+    if (key === 'a' && dx === 0) {
+        dx = -box;
+        dy = 0;
+    } else if (key === 'd' && dx === 0) {
+        dx = box;
+        dy = 0;
+    } else if (key === 'w' && dy === 0) {
+        dx = 0;
+        dy = -box;
+    } else if (key === 's' && dy === 0) {
+        dx = 0;
+        dy = box;
+    }
 }
 
 
@@ -112,7 +112,7 @@ function draw() {
             // Add eyes to the head
             if (index === 0) {
                 ctx.fillStyle = '#000';
-                
+
                 // Position eyes based on direction
                 if (dx > 0) { // Moving right
                     ctx.fillRect(part.x + box - 5, part.y + 5, 3, 3);
@@ -137,7 +137,7 @@ function draw() {
         ctx.shadowColor = '#f43f5e';
         ctx.fillStyle = '#f43f5e';
         ctx.beginPath();
-        ctx.arc(food.x + box/2, food.y + box/2, box/2, 0, Math.PI * 2);
+        ctx.arc(food.x + box / 2, food.y + box / 2, box / 2, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
 
@@ -203,4 +203,30 @@ function draw() {
 }
 
 // Runs draw() every 250ms to animate the game.
-game = setInterval(draw, 250);
+//game = setInterval(draw, 250);
+
+draw(); // Initial call to draw
+
+let lastTime = 0;
+const speed = 100; // ms per move
+
+// Use requestAnimationFrame for smoother animation
+// This function is called before every repaint by the browser
+// requestAnimationFrame(gameLoop) tells the browser to call gameLoop() before the next repaint
+function gameLoop(timestamp) {
+
+    if (!lastTime) lastTime = timestamp;
+    const delta = timestamp - lastTime;
+
+    // If enough time (speed) has passed, update the game (move snake and redraw)
+    if (delta > speed) {
+        draw();
+        lastTime = timestamp;
+    }
+
+    if (gameState === 'playing') {
+        requestAnimationFrame(gameLoop);
+    }
+}
+
+requestAnimationFrame(gameLoop);
