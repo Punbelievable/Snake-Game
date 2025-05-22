@@ -1,16 +1,106 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background: #f0f0f0;
+/* Modern game styling with dark theme */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --primary: #4ade80;
+  --secondary: #f43f5e;
+  --background: #0f172a;
+  --surface: #1e293b;
+  --text: #f8fafc;
+  --accent: #8b5cf6;
+}
+
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Press Start 2P', Arial, sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  line-height: 1.5;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 700px;
+  width: 100%;
 }
 
 h1 {
-  margin: 20px;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.score-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px;
+  background-color: var(--surface);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1rem;
+}
+
+.score {
+  font-size: 1rem;
+  color: var(--primary);
+}
+
+.high-score {
+  font-size: 1rem;
+  color: var(--accent);
 }
 
 canvas {
-  background-color: #111;
-  border: 4px solid #333;
+  background-color: var(--surface);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  max-width: 100%;
+  height: auto;
+  border: 4px solid var(--primary);
+}
+
+.controls {
+  background-color: var(--surface);
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  font-size: 0.8rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  margin-top: 1rem;
+}
+
+.controls p {
+  margin-bottom: 0.5rem;
+}
+
+.key {
+  display: inline-block;
+  background-color: var(--background);
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin: 0.25rem;
+  min-width: 2rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--accent);
 }

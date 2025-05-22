@@ -8,9 +8,29 @@
 </head>
 
 <body>
-  <h1>🐍 Snake Game</h1>
-
-  <canvas id="game" width="600" height="600"></canvas>
+  <div class="game-container">
+    <h1>🐍 Snake Game</h1>
+    
+    <div class="score-container">
+      <div class="score">Score: <span id="score">0</span></div>
+      <div class="high-score">High Score: <span id="high-score">0</span></div>
+    </div>
+    
+    <canvas id="game" width="600" height="600"></canvas>
+    
+    <div class="controls">
+      <p>Use arrow keys to control the snake</p>
+      <div>
+        <span class="key">W</span>
+      </div>
+      <div>
+        <span class="key">A</span>
+        <span class="key">S</span>
+        <span class="key">D</span>
+      </div>
+      <p>Press <span class="key">Space</span> to start/restart</p>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
