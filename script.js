@@ -97,14 +97,49 @@ function draw() {
     else if (gameState === 'playing') {
         // Draw snake
         // Loop through each part of the snake and draw it
-        snake.forEach(part => {
-            ctx.fillStyle = 'lime';
+        snake.forEach((part, index) => {
+            // Head is a different color
+            if (index === 0) {
+                ctx.fillStyle = '#4ade80'; // Bright green for head
+            } else {
+                // Gradient color for body parts
+                const colorValue = 250 - (index * 10);
+                ctx.fillStyle = `rgb(0, ${Math.max(colorValue, 50)}, 0)`;
+            }
             ctx.fillRect(part.x, part.y, box, box);
+
+            // Add eyes to the head
+            if (index === 0) {
+                ctx.fillStyle = '#000';
+                
+                // Position eyes based on direction
+                if (dx > 0) { // Moving right
+                    ctx.fillRect(part.x + box - 5, part.y + 5, 3, 3);
+                    ctx.fillRect(part.x + box - 5, part.y + box - 8, 3, 3);
+                } else if (dx < 0) { // Moving left
+                    ctx.fillRect(part.x + 2, part.y + 5, 3, 3);
+                    ctx.fillRect(part.x + 2, part.y + box - 8, 3, 3);
+                } else if (dy > 0) { // Moving down
+                    ctx.fillRect(part.x + 5, part.y + box - 5, 3, 3);
+                    ctx.fillRect(part.x + box - 8, part.y + box - 5, 3, 3);
+                } else { // Moving up
+                    ctx.fillRect(part.x + 5, part.y + 2, 3, 3);
+                    ctx.fillRect(part.x + box - 8, part.y + 2, 3, 3);
+                }
+            }
         });
 
         // Draw food at food.x and food.y position
-        ctx.fillStyle = 'red';
-        ctx.fillRect(food.x, food.y, box, box);
+        //ctx.fillStyle = 'red';
+        //ctx.fillRect(food.x, food.y, box, box);\
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = '#f43f5e';
+        ctx.fillStyle = '#f43f5e';
+        ctx.beginPath();
+        ctx.arc(food.x + box/2, food.y + box/2, box/2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
 
         // Move snake
         let head = { x: snake[0].x + dx, y: snake[0].y + dy };
